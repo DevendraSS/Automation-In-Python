@@ -6,7 +6,6 @@ from tkinter import *
 driver = webdriver.Chrome()
 
 def login(username, password):
-    # selenium code to open the window and
     driver.get("http://moodle.mitsgwalior.in/login/index.php")
     driver.maximize_window()
     driver.find_element(By.ID, "username").send_keys(username)
@@ -14,9 +13,7 @@ def login(username, password):
     driver.find_element(By.ID, "loginbtn").click()
     win.destroy()
 
-
 def teachers(teachnames):
-    print(teachnames)
     if teachnames.lower() == "dkj":
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=344")
 
@@ -35,7 +32,7 @@ def teachers(teachnames):
     elif teachnames.lower() == "vs":
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=724")
 
-    
+
 win = Tk()
 win.geometry("500x500")
 
@@ -43,12 +40,15 @@ win.geometry("500x500")
 start = Canvas(win)
 start.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
 start.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
+
 start.pack()
 
 #userinput and password
 userinput = Entry(win)
+userinput.insert(0, 'Username')
 userinput.pack()
 password = Entry(win, show="*")
+password.insert(0, 'Password')
 password.pack()
 
 #Button which says Click Here
@@ -77,6 +77,6 @@ button.pack()
 root.mainloop()
 
 
-
+time.sleep(60)
 
 time.sleep(5000)
