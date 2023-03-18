@@ -3,30 +3,39 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from tkinter import *
 
+driver = webdriver.Chrome()
+
+def login(username, password):
+    # selenium code to open the window and
+    driver.get("http://moodle.mitsgwalior.in/login/index.php")
+    driver.maximize_window()
+    driver.find_element(By.ID, "username").send_keys(username)
+    driver.find_element(By.ID, "password").send_keys(password)
+    driver.find_element(By.ID, "loginbtn").click()
+    win.destroy()
+
+
 def teachers(teachnames):
     print(teachnames)
     if teachnames.lower() == "dkj":
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=344")
-   
-   elif teachnames.lower() == "aso":
-         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=355")
-         
-   elif teachnames.lower() == "psharma":
-          driver.get("http://moodle.mitsgwalior.in/course/view.php?id=366")
-          
-   elif teachnames.lower() == "sk":
-          driver.get("http://moodle.mitsgwalior.in/course/view.php?id=530")
-          
-   elif teachnames.lower() == "ashish":
-           driver.get("http://moodle.mitsgwalior.in/course/view.php?id=771")
-           
-   elif teachnames.lower() == "vs":
-            driver.get("http://moodle.mitsgwalior.in/course/view.php?id=724")
-         
-        
-   
-     
 
+    elif teachnames.lower() == "aso":
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=355")
+
+    elif teachnames.lower() == "psharma":
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=366")
+
+    elif teachnames.lower() == "sk":
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=530")
+
+    elif teachnames.lower() == "ashish":
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=771")
+
+    elif teachnames.lower() == "vs":
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=724")
+
+    
 win = Tk()
 win.geometry("500x500")
 
@@ -36,18 +45,17 @@ start.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helve
 start.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
 start.pack()
 
+#userinput and password
+userinput = Entry(win)
+userinput.pack()
+password = Entry(win, show="*")
+password.pack()
+
 #Button which says Click Here
-button1 = Button(win, text="Click Here to Start", command="")
+button1 = Button(win, text="Click Here to Start", command=lambda: login(userinput.get(), password.get()))
 button1.pack()
 win.mainloop()
 
-#selenium code to open the window and
-driver = webdriver.Chrome()
-driver.get("http://moodle.mitsgwalior.in/login/index.php")
-driver.maximize_window()
-driver.find_element(By.ID , "username").send_keys("2021mc46ra")
-driver.find_element(By.ID , "password").send_keys("Rxxggee@123")
-driver.find_element(By.ID , "loginbtn").click()
 
 root = Tk()
 root.geometry("500x500")
@@ -69,5 +77,6 @@ button.pack()
 root.mainloop()
 
 
+time.sleep(60)
 
 time.sleep(5000)
