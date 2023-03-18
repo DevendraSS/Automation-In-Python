@@ -12,8 +12,8 @@ driver.get("http://moodle.mitsgwalior.in/")
 link = driver.find_element(By.LINK_TEXT,"Log in")
 link.click()
 
-driver.find_element(By.ID , "username").send_keys("2021mc6de")
-driver.find_element(By.ID , "password").send_keys("Devendra12#")
+driver.find_element(By.ID , "username").send_keys("Your Username")
+driver.find_element(By.ID , "password").send_keys("Your Password")
 driver.find_element(By.ID , "loginbtn").click()
 
 time.sleep(60)  
