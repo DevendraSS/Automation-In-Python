@@ -1,4 +1,5 @@
 import time
+import tkinter as tk
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from tkinter import *
@@ -37,23 +38,34 @@ def teachers(teachnames):
 
     
 win = Tk()
-win.geometry("500x500")
 
-#starting_page
-start = Canvas(win)
-start.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
-start.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
-start.pack()
+#customization of the tkinteer window
+win.title("Moodle Automation")
+win.geometry("400x350")
+win.maxsize(500 ,500)
+win.config(bg="lightgrey")
+
+
+enter_info = Label(win, text="Moodle Automation", bg="lightgrey" , font=("Arial" , 14))
+enter_info.grid(row=0, column=1, rowspan = 1 , columnspan=4, padx=5, pady=5)
+
+enter_info = Label(win, text="version = 0.1.1", bg="lightgrey" )
+enter_info.grid(row=1, column=1, rowspan = 1 , columnspan=4, padx=5, pady=5)
+
+Label(win , text = "Username").grid(row=2)
+Label(win , text = "Password").grid(row=3)
 
 #userinput and password
-userinput = Entry(win)
-userinput.pack()
-password = Entry(win, show="*")
-password.pack()
+userinput = Entry(win , width=35)
+password = Entry(win, width=35,show="*")
+
+userinput.grid(row=2 , column = 2 , padx = 20 ,pady=20)
+password.grid(row=3,column=2 , padx = 20 , pady= 20)
+
 
 #Button which says Click Here
-button1 = Button(win, text="Click Here to Start", command=lambda: login(userinput.get(), password.get()))
-button1.pack()
+tk.Button(win, text="Click Here to Start", command=lambda: login(userinput.get(), password.get())).grid(row =4 ,column =2 ,sticky=tk.W ,pady = 25 , padx=25)
+
 win.mainloop()
 
 
@@ -64,7 +76,7 @@ root.geometry("500x500")
 canvas = Canvas(root)
 canvas.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
 canvas.create_text(200, 250, text="Who's page do you want to access?", fill="black")
-canvas.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
+canvas.create_text(200, 220, text="Version: 0.0.1", fill="black", font=('Helvetica 10 bold'))
 canvas.pack()
 
 #For entering a text
