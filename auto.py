@@ -15,5 +15,7 @@ link.click()
 driver.find_element(By.ID , "username").send_keys("Your Username")
 driver.find_element(By.ID , "password").send_keys("Your Password")
 driver.find_element(By.ID , "loginbtn").click()
-driver.find_element(By.ID, "label_3_15").click()
+# driver.find_element(By.ID, "label_3_15").click()
+mycourse_cont = driver.find_element(By.ID, "inst559980").text #this line has been added to fetch the text from the specific ID, in this case, listing the names
+print(mycourse_cont) #this will print the names
 time.sleep(60)  
