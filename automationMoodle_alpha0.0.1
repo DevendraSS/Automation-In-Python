@@ -5,8 +5,14 @@ from tkinter import *
 
 def teachers(teachnames):
     print(teachnames)
-    if teachnames == "DKJ":
+    if teachnames.lower() == "DKJ":
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=344")
+   
+   elif teachnames.lower() == "ASO":
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=355")
+        
+   
+     
 
 win = Tk()
 win.geometry("500x500")
