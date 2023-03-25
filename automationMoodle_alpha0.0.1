@@ -86,9 +86,9 @@ def prompt(userchoice):
         var.title("Course Page")
 
         canvas = Canvas(var)
-        canvas.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
+        canvas.create_text(200, 180, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
         canvas.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
-        canvas.create_text(200, 250, text="Who's page do you want to access?", fill="black")
+        canvas.create_text(200, 250, text="Who's page do you want to access?", fill="black" , font=('Helvetica 15 bold'))
         canvas.pack()
 
         # For entering a text
@@ -96,7 +96,7 @@ def prompt(userchoice):
         userentry.pack()
 
         # Button which says Click Here
-        button1 = Button(var, text="Click Here", command=lambda: teachers(userentry.get()))
+        button1 = Button( var, text="Click Here", command=lambda: teachers(userentry.get()))
         button1.pack()
         var.mainloop()
 
@@ -159,22 +159,37 @@ tk.Button(win, text="Click Here to Start", command=lambda: login(userinput.get()
 win.mainloop()
 
 #window for user entry
+
 win2 = Tk()
-win2.geometry("500x500")
 
-canvas = Canvas(win2)
-canvas.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
-canvas.create_text(200, 250, text="What do you want to access?", fill="black")
-canvas.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
-canvas.pack()
+#customization of the tkinter window
+win2.title("Moodle Automation")
+win2.geometry("350x300")
+win2.maxsize(500 ,500)
+win2.config(bg="lightgrey")
 
-#For entering a text
-userentry = Entry(win2)
-userentry.pack()
+
+enter_info1 = Label(win2, text="Moodle Automation", bg="lightgrey" , font=("Arial" , 14))
+enter_info1.grid(row=0, column=4, rowspan = 1 , columnspan=4, padx=10, pady=10)
+
+enter_info3 = Label(win2, text="version = 0.1.1", bg="lightgrey" )
+enter_info3.grid(row=1, column=3, rowspan = 1 , columnspan=4, padx=10, pady=5 , ipadx = 5 , ipady =5)
+
+enter_info2 = Label(win2, text="What would you like to access?", bg="lightgrey" , font=("Arial" , 13))
+enter_info2.grid(row=2, column=3, rowspan = 1 , columnspan=4, padx=10, ipady=5 , ipadx =10)
+
+
+
+
+#userinput and password
+userinput = Entry(win2 , width=35)
+
+userinput.grid(row=3 , column = 5 , padx = 15 ,pady=15)
+
 
 #Button which says Click Here
-button1 = Button(win2, text="Click Here", command=lambda: prompt(userentry.get()))
-button1.pack()
+tk.Button(win2, text="Click Here", command=lambda: prompt(userinput.get())).grid(row =4 ,column =5 ,sticky=tk.W ,pady = 10 , padx=80 , ipadx = 5 , ipady =5)
+
 win2.mainloop()
 
 
