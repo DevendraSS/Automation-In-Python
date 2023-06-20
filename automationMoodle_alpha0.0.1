@@ -9,86 +9,69 @@ driver = webdriver.Chrome()
 
 def login(username, password):
     # selenium code to open the window and
-    win.destroy()
     driver.maximize_window()
-    driver.get("http://moodle.mitsgwalior.in/")
-    link = driver.find_element(By.LINK_TEXT,"Log in")
-    link.click()
+    driver.get("http://moodle.mitsgwalior.in/login/index.php")
     driver.find_element(By.ID, "username").send_keys(username)
     driver.find_element(By.ID, "password").send_keys(password)
     driver.find_element(By.ID, "loginbtn").click()
-    
-
+    win.destroy()
 
 def teachers(teachnames):
-    print(teachnames)
-    if teachnames.lower() == "dkj":
+    if teachnames.lower() == "dkj" or "deepak" in teachnames.lower():
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=344")
 
-    elif teachnames.lower() == "aso":
+    elif teachnames.lower() == "aso" or "angad" in teachnames.lower():
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=355")
 
-    elif teachnames.lower() == "psharma":
+    elif teachnames.lower() == "psharma" or "prabhakar" in teachnames.lower():
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=366")
 
-    elif teachnames.lower() == "sk":
-        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=530")
+    elif teachnames.lower() == "sk" or "sk bharadwaj" in teachnames.lower():
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=590")
 
-    elif teachnames.lower() == "ashish":
+    elif teachnames.lower() == "ashish" or "ashish kumar" in teachnames.lower():
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=771")
 
-    elif teachnames.lower() == "vs":
+    elif teachnames.lower() == "vs" or "vivek" in teachnames.lower():
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=724")
 
-
-
 def prompt(userchoice):
-
-   
-    x=userchoice.split()
+    x = userchoice.split()
 
     if "attendance" in x:
-        
         win2.destroy()
         root = Tk()
         root.geometry("500x500")
-        root.title("ATTENDANCE")
-        
 
-        enter_info = Label(root, text="Moodle Automation", bg="lightgrey" , font=("Arial" , 14))
-        enter_info.grid(row=0, column=1, rowspan = 1 , columnspan=4, padx=5, pady=5)
+        enter_info = Label(root, text="Moodle Automation", bg="lightgrey", font=("Arial", 14))
+        enter_info.grid(row=0, column=1, rowspan=1, columnspan=4, padx=5, pady=5)
 
-        enter_info = Label(root, text="version = 0.1.1", bg="lightgrey" )
-        enter_info.grid(row=1, column=1, rowspan = 1 , columnspan=4, padx=5, pady=5)
+        enter_info = Label(root, text="version = 0.1.1", bg="lightgrey")
+        enter_info.grid(row=1, column=1, rowspan=1, columnspan=4, padx=5, pady=5)
 
         # For entering a text
-        Label(root , text="Teacher Name ").grid(row=2)
-        Label(root , text="Teacher Subject ").grid(row=3)
+        Label(root, text="Teacher Name ").grid(row=2)
+        Label(root, text="Teacher Subject ").grid(row=3)
 
-        teacher_entry = Entry(root , width=35)
-        teacher_subject = Entry(root , width=35)
-        teacher_entry.grid(row=2 , column = 2 , padx = 20 ,pady=20)
-        teacher_subject.grid(row=3,column=2 , padx = 20 , pady= 20)
-
-        
-        
+        teacher_entry = Entry(root, width=35)
+        teacher_subject = Entry(root, width=35)
+        teacher_entry.grid(row=2, column=2, padx=20, pady=20)
+        teacher_subject.grid(row=3, column=2, padx=20, pady=20)
 
         # Button which says Click Here
-        button1 = Button(root, text="Click Here", command=lambda: teacher_attendance(teacher_entry.get(), teacher_subject.get())).grid(row =4 ,column =2 ,sticky=tk.W ,pady = 25 , padx=25)
-        
-        
+        button2 = Button(root, text="Click Here", command=lambda: teacher_attendance(teacher_entry.get().lower(), teacher_subject.get().lower())).grid(row=4, column=2, sticky=tk.W, pady=25, padx=25)
+
         root.mainloop()
 
     elif "page" in x:
         win2.destroy()
         var = Tk()
         var.geometry("500x500")
-        var.title("Course Page")
 
         canvas = Canvas(var)
-        canvas.create_text(200, 180, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
+        canvas.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
         canvas.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
-        canvas.create_text(200, 250, text="Who's page do you want to access?", fill="black" , font=('Helvetica 15 bold'))
+        canvas.create_text(200, 250, text="Who's page do you want to access?", fill="black")
         canvas.pack()
 
         # For entering a text
@@ -96,103 +79,126 @@ def prompt(userchoice):
         userentry.pack()
 
         # Button which says Click Here
-        button1 = Button( var, text="Click Here", command=lambda: teachers(userentry.get()))
+        button1 = Button(var, text="Click Here", command=lambda: teachers(userentry.get()))
         button1.pack()
         var.mainloop()
-
 
 def teacher_attendance(teachername, subject):
     teachersplit = teachername.split()
     subjsplit = subject.split()
 
-    if "dkj" in teachersplit and "transform" in subjsplit:
+    if "dkj" in teachersplit or "Deepak" in teachersplit and "vector" in subjsplit:
         driver.get("http://moodle.mitsgwalior.in/course/view.php?id=344&section=2")
-        elems = driver.find_element(By.CLASS_NAME, "aalink")
+        elems = driver.find_element(By.LINK_TEXT, "Attendance")
 
         if len(str(elems)) > 0:
-            driver.get("http://moodle.mitsgwalior.in/mod/attendance/view.php?id=78375")
+            elems.click()
+            if (driver.find_element(By.CLASS_NAME, "empty")):
+                messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+            else:
+                driver.get("http://moodle.mitsgwalior.in/mod/attendance/view.php?id=78742")
 
         else:
-            messagebox.showinfo("Access Denied", "You are not enrolled in this Course")
+            messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
 
-    elif "dkj" in teachersplit and "nec" in subjsplit:
-        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=344&section=1")
-        elems = driver.find_element(By.CLASS_NAME, "aalink")
+    elif "skb" in teachersplit or "sk bharadwaj" in teachersplit and "python" in subjsplit:
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=590&section=4")
+        elems = driver.find_element(By.LINK_TEXT, "Attendance (MAC II Year A)")
 
         if len(str(elems)) > 0:
-            driver.get("")
+            elems.click()
+            if (driver.find_element(By.CLASS_NAME, "empty")):
+                messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+            else:
+                driver.get("http://moodle.mitsgwalior.in/mod/attendance/view.php?id=78742")
 
         else:
-            messagebox.showinfo("Access Denied", "You are not enrolled in this Course")
+            messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+
+    elif "ashish" in teachersplit or "ashish kumar" in teachersplit and "daa" in subjsplit:
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=771&section=2")
+        messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
 
 
-    
+    elif "aso" in teachersplit or "ojha" in teachersplit and "number theory" in subjsplit:
+        a = ("http://moodle.mitsgwalior.in/course/view.php?id=355")
+        messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+
+    elif "khanna" in teachersplit  or "sanjiv" in teachersplit or "ickt" in subjsplit:
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=530")
+        elems = driver.find_element(By.LINK_TEXT, "Attendance")
+        if len(str(elems)) > 0:
+            elems.click()
+            if (driver.find_element(By.CLASS_NAME, "empty")):
+                messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+            else:
+                driver.get("http://moodle.mitsgwalior.in/mod/attendance/view.php?id=78742")
+
+        else:
+            messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+
+    elif "vivek" in teachersplit or "vs" in teachersplit and "toc" in subjsplit:
+        driver.get("http://moodle.mitsgwalior.in/course/view.php?id=724")
+        elems = driver.find_element(By.LINK_TEXT, "Attendance")
+        if len(str(elems)) > 0:
+            elems.click()
+            if (driver.find_element(By.CLASS_NAME, "empty")):
+                messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+            else:
+                driver.get("http://moodle.mitsgwalior.in/mod/attendance/view.php?id=78742")
+
+        else:
+            messagebox.showinfo("Not Found", "The teacher has not made any attendance prompt!")
+
+
 win = Tk()
-
-#customization of the tkinter window
+# customization of the tkinter window
 win.title("Moodle Automation")
 win.geometry("400x350")
-win.maxsize(500 ,500)
+win.maxsize(500, 500)
+
 win.config(bg="lightgrey")
+enter_info = Label(win, text="Moodle Automation", bg="lightgrey", font=("Arial", 14))
 
+enter_info.grid(row=0, column=1, rowspan=1, columnspan=4, padx=5, pady=5)
+enter_info = Label(win, text="version = 0.1.1", bg="lightgrey")
 
-enter_info = Label(win, text="Moodle Automation", bg="lightgrey" , font=("Arial" , 14))
-enter_info.grid(row=0, column=1, rowspan = 1 , columnspan=4, padx=5, pady=5)
+enter_info.grid(row=1, column=1, rowspan=1, columnspan=4, padx=5, pady=5)
+Label(win, text="Username").grid(row=2)
 
-enter_info = Label(win, text="version = 0.1.1", bg="lightgrey" )
-enter_info.grid(row=1, column=1, rowspan = 1 , columnspan=4, padx=5, pady=5)
+Label(win, text="Password").grid(row=3)
+# userinput and password
+userinput = Entry(win, width=35)
 
-Label(win , text = "Username").grid(row=2)
-Label(win , text = "Password").grid(row=3)
+password = Entry(win, width=35, show="*")
+userinput.grid(row=2, column=2, padx=20, pady=20)
 
-#userinput and password
-userinput = Entry(win , width=35)
-password = Entry(win, width=35,show="*")
+password.grid(row=3, column=2, padx=20, pady=20)
+# Button which says Click Here
 
-userinput.grid(row=2 , column = 2 , padx = 20 ,pady=20)
-password.grid(row=3,column=2 , padx = 20 , pady= 20)
-
-
-#Button which says Click Here
-tk.Button(win, text="Click Here to Start", command=lambda: login(userinput.get(), password.get())).grid(row =4 ,column =2 ,sticky=tk.W ,pady = 25 , padx=25)
+tk.Button(win, text="Click Here to Start", command=lambda: login(userinput.get(), password.get())).grid(row=4, column=2, sticky=tk.W, pady=25, padx=25)
 
 win.mainloop()
 
-#window for user entry
-
+# window for user entry
 win2 = Tk()
 
-#customization of the tkinter window
-win2.title("Moodle Automation")
-win2.geometry("350x300")
-win2.maxsize(500 ,500)
-win2.config(bg="lightgrey")
+win2.geometry("500x500")
+canvas = Canvas(win2)
+canvas.create_text(200, 200, text="Moodle Automation", fill="black", font=('Helvetica 15 bold'))
+canvas.create_text(200, 250, text="What do you want to access?", fill="black")
+canvas.create_text(200, 220, text="Version: 0.0.1α", fill="black", font=('Helvetica 10 bold'))
 
+canvas.pack()
+# For entering a text
+userentry = Entry(win2)
 
-enter_info1 = Label(win2, text="Moodle Automation", bg="lightgrey" , font=("Arial" , 14))
-enter_info1.grid(row=0, column=4, rowspan = 1 , columnspan=4, padx=10, pady=10)
-
-enter_info3 = Label(win2, text="version = 0.1.1", bg="lightgrey" )
-enter_info3.grid(row=1, column=3, rowspan = 1 , columnspan=4, padx=10, pady=5 , ipadx = 5 , ipady =5)
-
-enter_info2 = Label(win2, text="What would you like to access?", bg="lightgrey" , font=("Arial" , 13))
-enter_info2.grid(row=2, column=3, rowspan = 1 , columnspan=4, padx=10, ipady=5 , ipadx =10)
-
-
-
-
-#userinput and password
-userinput = Entry(win2 , width=35)
-
-userinput.grid(row=3 , column = 5 , padx = 15 ,pady=15)
-
-
-#Button which says Click Here
-tk.Button(win2, text="Click Here", command=lambda: prompt(userinput.get())).grid(row =4 ,column =5 ,sticky=tk.W ,pady = 10 , padx=80 , ipadx = 5 , ipady =5)
+userentry.pack()
+# Button which says Click Here
+button1 = Button(win2, text="Click Here", command=lambda: prompt(userentry.get()))
+button1.pack()
 
 win2.mainloop()
 
-
-
-
 time.sleep(5000)
+
